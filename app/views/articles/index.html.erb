@@ -1,0 +1,12 @@
+<%@articles.each do |article|%>
+
+<div>
+<p>
+<h4><%= article.title %></h4>
+Decription:<%= article.description%><br>
+Click The Link To Learn More:<%=link_to article.url, article.url%><br>
+Published At: <%= article.published_at %><br>
+</p>
+</div>
+<%end%>
+<%= paginate @articles %>
