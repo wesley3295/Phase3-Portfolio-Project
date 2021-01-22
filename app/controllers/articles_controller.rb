@@ -32,7 +32,8 @@ class ArticlesController < ApplicationController
 
     def update
         find_article
-        if @article.save
+        
+        if @article.update(article_params)
           
             redirect_to articles_path
             
