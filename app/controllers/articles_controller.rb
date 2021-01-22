@@ -1,37 +1,45 @@
 class ArticlesController < ApplicationController
-    before_action :find_article, only: [:show] #:edit, :update, :destroy]
+    # before_action :find_article, only: [:show] #:edit, :update, :destroy]
     
     # def new
     #     @article = Article.new
     # end
 
-    # def create
-    #     @article= Article.new(article_params)
-    # end
+    def create
+        redirect_to articles_path
+    end
 
     def show
-
+        find_article
+        @comment = Comment.new
     end
 
     def index
         Api.load_data
+       
+       if !params[:source].blank?
+        articles = Article.by_source(params[:source])
+        @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)
+    else
         articles = Article.all.sort_by(&:published_at).reverse
-       @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)
-         
+        @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)
+    end
     end
 
     # def edit
 
     # end
 
-    # def update
-    #     if @article.update
-    #         redirect_to article_path(@article)
-    #     else
-    #         render :new           
-    #         end
-    #     end
-    # end
+    def update
+        find_article
+        if @article.save
+          
+            redirect_to articles_path
+            
+        # else
+            # render :show           
+            end
+    end
 
     # def delete
     #     @article.delete
@@ -40,10 +48,10 @@ class ArticlesController < ApplicationController
 
     private
     def find_article
-        @article = Article.find_by_id(:id)
+        @article = Article.find_by_id(params[:id])
     end
 
-    # def article_params
-    #     params.require(:article).permit()
-    # end
+    def article_params
+        params.require(:article).permit(comment_attributes: [:content])
+    end
 end
