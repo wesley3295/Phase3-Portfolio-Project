@@ -6,28 +6,34 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user= User.new(user_params)
+        user = User.new(user_params)
+        if user.save
+            session[:user_id] = user.id
+            redirect_to user_path(user)
+        else
+            render :new
+        end
     end
 
     def show
-
+        byebug
     end
 
-    def index
-        @users = User.all
-    end
+    # def index
+    #     @users = User.all
+    # end
 
     def edit
 
     end
 
     def update
-        if @user.update
+        if @user.update(user_params)
             redirect_to user_path(@user)
         else
             render :new           
             end
-        end
+
     end
 
     def delete
@@ -41,6 +47,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-        params.require(:user).permit(:username, :email, :password_digest)
+        params.require(:user).permit(:username, :email, :password, :first_name, :last_name, :phone_number, :date_of_birth)
     end
 end
