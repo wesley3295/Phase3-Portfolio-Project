@@ -8,21 +8,27 @@ class CommentsController < ApplicationController
     
         def create
             comment = Comment.new(comment_params)
-           
+           article = comment.article
+           comment.user_id = current_user.id
+         
             if comment.save
             redirect_to article_path(article)
-            # else
-            #      render '/articles/show'
+            else
+                 render '/articles/show'
             end
         end
     
-        def show
+        # def show
     
-        end
+        # end
     
         def index
-            @comments = Comment.all
-        end
+            if params[:article_id]
+              @comments = Article.find(params[:article_id]).comments     #<-----NOW WE CAN NEST IN commentsCONTROLLER INSTEAD OF articleS CONTROLLER
+            else
+              @comments = Post.all
+            end
+          end
     
         def edit
     
