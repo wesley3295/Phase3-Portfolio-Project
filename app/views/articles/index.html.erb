@@ -3,11 +3,9 @@
 <%@articles.each do |article|%>
 <div>
 
+<%=render partial: '/partials/article', locals: {article: article}%><br>
     
-        <%=render partial: '/partials/article', locals: {article: article}%><br>
-    
-
-        <%=render partial: '/partials/form', locals: {comment: @comment, article: article, submit_text: "Submit Comment"}%>
+ <%=render partial: '/partials/form', locals: {comment: @comment, article: article, submit_text: "Submit Comment"}%>
 
 </div>
 <%end%>
