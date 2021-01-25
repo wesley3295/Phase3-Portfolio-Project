@@ -7,7 +7,7 @@ class RepliesController < ApplicationController
         if @reply.save  
         redirect_to article_comments_path(@article)#route to art/id/com/id
         else
-             render  :'/comments/index'
+             render  :edit
         end
     end
 

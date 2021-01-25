@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
     
-        before_action :find_comment, only: [:show, :edit, :update, :destroy, :delete]
+        before_action :find_comment, only: [:show, :edit, :update, :destroy]
         
         def new
             @comment = Comment.new
@@ -20,12 +20,14 @@ class CommentsController < ApplicationController
         end
     
         def show
+            
+            @article = @comment.article
             if params[:article_id]
             @comments = Article.find(params[:article_id]).comments 
             @article = Article.find(params[:article_id])
             
             else 
-                redirect_to article_path(article)
+                redirect_to article_path(@article)
             end
         end
 
