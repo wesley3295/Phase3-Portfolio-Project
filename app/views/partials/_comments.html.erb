@@ -7,8 +7,8 @@ Comments:
 
             
             <%= link_to 'Delete', comment, method: :delete, data:{Confirm: "Delete?"}%> 
-            <%= render partial: '/partials/rform', locals: {reply: @reply, comment: comment}%>
             <%= link_to 'Edit', edit_comment_path(comment)%>
+            <%= render partial: '/partials/rform', locals: {reply: @reply, comment: comment}%>
     </div>
 
     <%= render partial: '/partials/replies', locals:{article: @article, comment: comment}%>

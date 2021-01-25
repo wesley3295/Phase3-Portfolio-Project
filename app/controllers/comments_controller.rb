@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
               @article = Article.find(params[:article_id]) #<-----NOW WE CAN NEST IN commentsCONTROLLER INSTEAD OF articleS CONTROLLER
               @reply = Reply.new
             else
-              @comments = Post.all
+              @comments = Comment.all
             end
           end
     

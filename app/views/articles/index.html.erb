@@ -1,15 +1,15 @@
-<%=render partial: 'filter', locals: {articles: @articles}%>
-<%@articles.each do |article|%>
+<%=render partial: '/partials/filter', locals: {articles: @articles}%>
 
+<%@articles.each do |article|%>
 <div>
-<p>
-<h4><%= article.title %></h4><br>
-Source: <%=article.source%><br>
-Decription:<%= article.description.first(200)%><br>
-Click The Link To Learn More:<%=link_to article.url, article.url%>...<br>
-Published At: <%= article.published_at %><br>
-</p>
- <%=link_to 'Click here to add Comment', article_path(article)%>
+
+    
+        <%=render partial: '/partials/article', locals: {article: article}%><br>
+    
+
+        <%=render partial: '/partials/form', locals: {comment: @comment, article: article, submit_text: "Submit Comment"}%>
+
 </div>
 <%end%>
+
 <%= paginate @articles %>
