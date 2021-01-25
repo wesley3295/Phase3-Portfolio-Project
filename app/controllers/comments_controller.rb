@@ -7,14 +7,15 @@ class CommentsController < ApplicationController
         end
     
         def create
-            comment = Comment.new(comment_params)
-           article = comment.article
-           comment.user_id = current_user.id
+            @comment = Comment.new(comment_params)
+           @article = @comment.article
+           @reply = Reply.new
+           @comment.user_id = current_user.id
          
-            if comment.save
-            redirect_to article_comments_path(article)
+            if @comment.save
+            redirect_to article_comments_path(@article)
             else
-                 render '/articles/show'
+                 render :index
             end
         end
     
