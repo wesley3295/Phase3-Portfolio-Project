@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
     
-        before_action :find_comment, only: [:show, :edit, :update, :destroy]
+        before_action :find_comment, only: [:show, :edit, :update, :destroy, :delete]
         
         def new
             @comment = Comment.new
@@ -12,19 +12,30 @@ class CommentsController < ApplicationController
            comment.user_id = current_user.id
          
             if comment.save
-            redirect_to article_path(article)
+            redirect_to article_comments_path(article)
             else
                  render '/articles/show'
             end
         end
     
-        # def show
-    
-        # end
-    
-        def index
+        def show
             if params[:article_id]
-              @comments = Article.find(params[:article_id]).comments     #<-----NOW WE CAN NEST IN commentsCONTROLLER INSTEAD OF articleS CONTROLLER
+            @comments = Article.find(params[:article_id]).comments 
+            @article = Article.find(params[:article_id])
+            
+            else 
+                redirect_to article_path(article)
+            end
+        end
+
+        # If you add _path or _url to any of the names under "Prefix", you'll have the helper for that route. ex.) author_post_path(author_id, post_id)
+        def index
+            @comment = Comment.new
+        
+            if params[:article_id]
+              @comments = Article.find(params[:article_id]).comments 
+              @article = Article.find(params[:article_id]) #<-----NOW WE CAN NEST IN commentsCONTROLLER INSTEAD OF articleS CONTROLLER
+              @reply = Reply.new
             else
               @comments = Post.all
             end
@@ -43,9 +54,10 @@ class CommentsController < ApplicationController
             end
         end
     
-        def delete
+        def destroy
+            article = @comment.article
             @comment.delete
-            redirect_to :new
+            redirect_to article_comments_path(article)
         end
     
         private
