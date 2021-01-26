@@ -1,10 +1,9 @@
 class Comment < ApplicationRecord
     belongs_to :article
-    belongs_to :user
+    # belongs_to :user
     has_many :replies
 
     validates :content, presence: true
-# belongs_to :user
 
 end
 

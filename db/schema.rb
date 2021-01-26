@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_055128) do
+ActiveRecord::Schema.define(version: 2021_01_26_042002) do
 
   create_table "articles", force: :cascade do |t|
     t.string "author"
@@ -38,22 +38,29 @@ ActiveRecord::Schema.define(version: 2021_01_23_055128) do
   create_table "replies", force: :cascade do |t|
     t.string "content"
     t.integer "comment_id"
-    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "source"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "address"
-    t.datetime "date_of_birth"
-    t.integer "phone_number"
-    t.string "username"
-    t.string "password_digest"
-    t.string "email"
+    t.string "last_name", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "username", default: "", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
 end
