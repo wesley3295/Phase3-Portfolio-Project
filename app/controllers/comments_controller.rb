@@ -1,6 +1,8 @@
 class CommentsController < ApplicationController
     
         before_action :find_comment, only: [:show, :edit, :update, :destroy]
+        before_action :find_article, only: [:index]
+        before_action :article_comments, only: [:index]
         
         def new
             @comment = Comment.new
@@ -33,12 +35,10 @@ class CommentsController < ApplicationController
 
         # If you add _path or _url to any of the names under "Prefix", you'll have the helper for that route. ex.) author_post_path(author_id, post_id)
         def index
-            @comment = Comment.new
-        
-            if params[:article_id]
-              @comments = Article.find(params[:article_id]).comments 
-              @article = Article.find(params[:article_id]) #<-----NOW WE CAN NEST IN commentsCONTROLLER INSTEAD OF articleS CONTROLLER
-              @reply = Reply.new
+            
+            if @article
+                @comment = Comment.new
+                @reply = Reply.new
             else
               @comments = Comment.all
             end
@@ -64,6 +64,14 @@ class CommentsController < ApplicationController
         end
     
         private
+        def find_article
+            @article = Article.find(params[:article_id]) 
+        end
+
+        def article_comments
+            @comments= @article.comments if @article
+        end
+
         def find_comment
             @comment = Comment.find_by_id(params[:id])
         end

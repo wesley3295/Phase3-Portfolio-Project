@@ -17,7 +17,7 @@ class ArticlesController < ApplicationController
     end
 
     def index
-        # Api.load_data
+        Api.load_data
        @comment = Comment.new
        if !params[:source].blank?
         articles = Article.by_source(params[:source])
@@ -32,17 +32,17 @@ class ArticlesController < ApplicationController
 
     # end
 
-    def update
-        find_article
+    # def update
+    #     find_article
         
-        if @article.update(article_params)
+    #     if @article.update(article_params)
           
-            redirect_to articles_path
+    #         redirect_to articles_path
             
-        # else
-            # render :show           
-            end
-    end
+    #     # else
+    #         # render :show           
+    #         end
+    # end
 
     # def delete
     #     @article.delete
