@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
-  devise_for :users
+  devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations'}
   resources :articles
   resources :comments
   resources :replies
-  
+  resources :subscriptions
   resources :articles, only: [:show] do
     resources :comments, only: [:show, :index]
   end

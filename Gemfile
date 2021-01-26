@@ -26,6 +26,7 @@ gem 'net-http'
 gem 'uri'
 gem 'json'
 gem 'kaminari', '~> 1.2', '>= 1.2.1'
+gem 'pry'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

@@ -1,6 +1,6 @@
 class Article < ApplicationRecord
     has_many :comments
-    # has_many :users, through: :comments
+    has_many :users, through: :comments
     has_many :replies, through: :comments
 
     validates :title, uniqueness: true
@@ -15,5 +15,6 @@ end
 def self.all_sources
     Article.pluck(:source).uniq.sort
 end
+
 
 end

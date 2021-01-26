@@ -38,11 +38,13 @@ ActiveRecord::Schema.define(version: 2021_01_26_042002) do
   create_table "replies", force: :cascade do |t|
     t.string "content"
     t.integer "comment_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "subscriptions", force: :cascade do |t|
+    t.integer "user_id"
     t.string "source"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

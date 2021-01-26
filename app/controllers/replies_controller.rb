@@ -3,7 +3,7 @@ class RepliesController < ApplicationController
         @reply = Reply.new(reply_params)
         @comment = @reply.comment
         @article = @comment.article
-    #    @reply.user_id = current_user.id
+       @reply.user_id = current_user.id
         if @reply.save  
         redirect_to article_comments_path(@article)#route to art/id/com/id
         else
