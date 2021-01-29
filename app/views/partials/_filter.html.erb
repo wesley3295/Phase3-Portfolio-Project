@@ -1,9 +1,7 @@
 <div>
-  <h3>Filter articles:</h3>
   <%= form_tag("/articles", method: "get") do %>
-    <%= label_tag("Source")%>
-
-    <%= select_tag "source", options_for_select(Article.all_sources), include_blank: true %>
-    <%= submit_tag "Filter" %>
+    <%= label_tag("Filter Source")%>
+    <%= select_tag "source", options_for_select(Article.all_sources), include_blank: true, class:"custom-select custom-select-lg mb-3",onchange:'if(this.value != 0) { this.form.submit(); }'%>
   <% end %>
 </div>
+

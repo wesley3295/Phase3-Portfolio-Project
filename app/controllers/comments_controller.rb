@@ -1,9 +1,8 @@
 class CommentsController < ApplicationController
     
         before_action :find_comment, only: [:show, :edit, :update, :destroy]
-        before_action :find_article, only: [:index]
+        before_action :find_article, only: [:index, :new]
         before_action :article_comments, only: [:index]
-        
         def new
             @comment = Comment.new
         end
@@ -35,7 +34,7 @@ class CommentsController < ApplicationController
 
         # If you add _path or _url to any of the names under "Prefix", you'll have the helper for that route. ex.) author_post_path(author_id, post_id)
         def index
-            
+            @bad_sources = ["CNBC","CNN Europe","Engadget","Fansided","Financial Post | Canada Business News","Forbes","Seeking Alpha","Sports Illustrated","Sports | Reddit", "The Verge","Yardbarker.com","business","dailynorthwestern","dennews","deseretnews","euroweeklynews","hitfix","indybay","nationalpost","newswithviews","si","stylecaster","suntimes","thestar","tmz","torontosun","tribune242","vancouversun","wwd"]
             if @article
                 @comment = Comment.new
                 @reply = Reply.new

@@ -3,6 +3,16 @@ def new
     @user = User.new
     @subscription = Subscription.new
 end
+
+def create
+    @user = User.new(user_params)
+    if @user.save
+        redirect_to articles_path
+    else
+        render :new
+    end
+end
+
     private
     
     def user_params

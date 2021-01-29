@@ -36,9 +36,7 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
-<%=f.fields_for :subscription, @user.subscriptions do |s|%>
-  <%= s.check_box :subscription, value:Article.select(:source).distinct %>
-<% end %>
+
 
   <div class="actions">
     <%= f.submit "Sign up" %>

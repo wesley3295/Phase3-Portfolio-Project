@@ -17,7 +17,8 @@ class ArticlesController < ApplicationController
     end
 
     def index
-        Api.load_data
+       
+        # Api.load_data
        @comment = Comment.new
        if !params[:source].blank?
         articles = Article.by_source(params[:source])
