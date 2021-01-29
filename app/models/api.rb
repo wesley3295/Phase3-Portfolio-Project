@@ -13,11 +13,12 @@ class Api < ApplicationRecord
             if !Article.exists?(d)
                 @article = Article.create(d)
                 
-            
             end
           
         end
         
     end
+
     
+
 end
