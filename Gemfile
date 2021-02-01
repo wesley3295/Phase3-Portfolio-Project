@@ -26,8 +26,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 # gem 'devise'
 gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'omniauth'
-gem 'omniauth-facebook'
 gem "omniauth-rails_csrf_protection"
+gem 'omniauth-facebook'
 
 gem 'net-http'
 gem 'uri'
