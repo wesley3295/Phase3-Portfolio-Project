@@ -2,15 +2,32 @@ class RepliesController < ApplicationController
     before_action :find_reply, only: [:destroy,:update,:edit]
     before_action :bad_sources, only: [:create]
 
+    # def create
+    #     @reply = Reply.new(reply_params)
+    #     @comment = @reply.comment
+    #     @article = @comment.article
+    #     @reply.user_id = current_user.id
+    #     if @reply.save  
+    #     redirect_to article_comments_path(@article)#route to art/id/com/id
+    #     else
+    #          render '/comments/index'
+    #     end
+    # end
+
     def create
         @reply = Reply.new(reply_params)
         @comment = @reply.comment
         @article = @comment.article
-        @reply.user_id = current_user.id
-        if @reply.save  
-        redirect_to article_comments_path(@article)#route to art/id/com/id
-        else
-             render '/comments/index'
+        if !current_user
+            flash[:error2] = "You must be logged in to make a new reply."
+            render '/comments/index'
+        elsif
+            @reply.user_id = current_user.id
+                if  @reply.save
+                    redirect_to article_comments_path(@article)
+                else
+                    render '/comments/index'
+                end
         end
     end
 

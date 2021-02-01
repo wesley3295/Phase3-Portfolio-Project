@@ -17,7 +17,9 @@
                                     </div>
                                 </div>
                                 <%= comment.content%> 
-                                <% if current_user.id == comment.user.id%> <br>
+                                <% if !current_user %><br>
+                                    <%=""%>
+                                    <% elsif current_user.id == comment.user_id%>
                                     <%= link_to 'Delete', comment,class:"btn btn-ssm btn-outline-secondary", method: :delete, data:{Confirm: "Delete?"}%> 
                                     <%= link_to 'Edit', edit_comment_path(comment),class:"btn btn-ssm btn-outline-secondary"%>
                                 <%end%>

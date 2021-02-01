@@ -13,6 +13,7 @@
 
 
  <div class="field<%= ' field_with_errors' if reply.errors[:content].any? %>">
+ <%=flash[:error2]%>
 <%=f.hidden_field :comment_id, :value=> comment.id%>
 
 <%=f.text_area :content, placeholder:"Add a reply", class: "form-control addtxt" %>

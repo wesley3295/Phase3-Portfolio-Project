@@ -6,7 +6,6 @@ class ArticlesController < ApplicationController
 
     def index
         # Api.load_data
-       @comment = Comment.new
        if !params[:source].blank?
         articles = Article.by_source(params[:source])
         @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)

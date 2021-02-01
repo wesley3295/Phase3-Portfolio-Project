@@ -1,4 +1,5 @@
 
+<div class="form-floating container">
 <%=form_for comment do |f|%>
  <% if comment.errors.any? %>
    <div id="error_explanation">
@@ -10,7 +11,6 @@
      </ul>
    </div>
   <% end %>
-<div class="form-floating container">
   <div class="field<%= ' field_with_errors' if comment.errors[:content].any? %>">
   <%=f.hidden_field :article_id, :value=> article.id%>
   <%=f.label :content, 'Comment:'%><br>

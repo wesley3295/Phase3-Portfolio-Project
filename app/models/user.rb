@@ -4,12 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
+         validates :email, presence: true
+         validates :password, presence: true
     
   has_many :comments
   has_many :articles, through: :comments
   has_many :replies
   has_many :subscriptions
   accepts_nested_attributes_for :subscriptions
+ 
 
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

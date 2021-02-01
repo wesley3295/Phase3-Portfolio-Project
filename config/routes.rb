@@ -4,7 +4,9 @@ Rails.application.routes.draw do
   resources :articles
   root to: "articles#index"
   resources :articles, only: [:show] do
-    resources :comments, only: [:show, :index, :new]
+    resources :comments, only: [:show, :index, :new] do
+      resources :replies, only: [:edit]
+    end
   end
   resources :comments
   resources :replies

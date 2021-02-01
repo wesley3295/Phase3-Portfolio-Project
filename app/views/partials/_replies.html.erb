@@ -8,8 +8,10 @@
         </div>
     </div> 
     <%= reply.content%> <br>
-    <% if current_user.id == reply.user.id%>
-                <%=link_to "Edit Reply", edit_reply_path(reply),class:"btn btn-ssm btn-outline-secondary"%> 
+    <%if !current_user%>
+<%=""%>
+    <% elsif current_user.id == reply.user.id%>
+                <%=link_to "Edit Reply", edit_article_comment_reply_path(article, comment, reply),class:"btn btn-ssm btn-outline-secondary"%> 
                 <%=link_to "Delete Reply", reply , method: :delete,  data:{Confirm: "Delete?"},class:"btn btn-ssm btn-outline-secondary"%>
                 <%end%>
             <%end%>
