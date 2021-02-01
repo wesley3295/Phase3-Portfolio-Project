@@ -10,6 +10,7 @@ class SessionsController < Devise::SessionsController
         @user = User.new 
     end
 
+    
     # def create
     #     @user = User.find_by_username(params[:user][:email])
     #     if @user && @user.authenticate(params[:user][:password])

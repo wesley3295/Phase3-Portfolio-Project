@@ -1,23 +1,10 @@
 class ArticlesController < ApplicationController
-    # before_action :find_article, only: [:show] #:edit, :update, :destroy]
-    
-    # def new
-    #     @article = Article.new
-    # end
     
     def create
         redirect_to articles_path
     end
 
-    def show
-        find_article
-        @comment = Comment.new
-        @reply = Reply.new
-        
-    end
-
     def index
-       
         # Api.load_data
        @comment = Comment.new
        if !params[:source].blank?
@@ -26,29 +13,8 @@ class ArticlesController < ApplicationController
     else
         articles = Article.all.sort_by(&:published_at).reverse
         @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)
+        end
     end
-    end
-
-    # def edit
-
-    # end
-
-    # def update
-    #     find_article
-        
-    #     if @article.update(article_params)
-          
-    #         redirect_to articles_path
-            
-    #     # else
-    #         # render :show           
-    #         end
-    # end
-
-    # def delete
-    #     @article.delete
-    #     redirect_to :new
-    # end
 
     private
     def find_article
