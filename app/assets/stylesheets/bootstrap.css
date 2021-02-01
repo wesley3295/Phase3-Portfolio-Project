@@ -61,6 +61,8 @@ body {
   color: #212529;
   text-align: left;
   background-color: #fff;
+  align-items: center;
+
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -3135,6 +3137,12 @@ fieldset:disabled a.btn {
   font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
+}
+.btn-ssm, .btn-group-ssm > .btn {
+  padding: 0.20rem 0.4rem;
+  font-size: 0.700rem;
+  line-height: 1;
+  border-radius: 0.15rem;
 }
 
 .btn-block {
@@ -6809,6 +6817,9 @@ button.bg-danger:focus {
 .bg-light {
   background-color: #f8f9fa !important;
 }
+.bg-lookatmego {
+  background-color: #c2c5c8 !important;
+}
 
 a.bg-light:hover, a.bg-light:focus,
 button.bg-light:hover,
@@ -10264,6 +10275,7 @@ a.text-dark:hover, a.text-dark:focus {
   }
   body {
     min-width: 992px !important;
+    
   }
   .container {
     min-width: 992px !important;
@@ -10299,4 +10311,92 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap');
+
+.media img {
+    width: 60px;
+    height: 60px
+}
+
+.reply a {
+    text-decoration: none
+}
+  .addtxt {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+    font-size: 13px;
+    width: 350px;
+    background-color: #e5e8ed;
+    font-weight: 500
+}
+
+.form-control: focus {
+    color: #000
+}
+
+.second {
+    width: 350px;
+    background-color: white;
+    border-radius: 4px;
+    box-shadow: 10px 10px 5px #aaaaaa
+}
+
+.text1 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #56575b
+}
+
+.text2 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: 6px;
+    color: #56575b
+}
+
+.text3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 4px;
+    color: #828386
+}
+
+.text3o {
+    color: #00a5f4
+}
+
+.text4 {
+    font-size: 13px;
+    font-weight: 500;
+    color: #828386
+}
+
+.text4i {
+    color: #00a5f4
+}
+
+.text4o {
+    color: white
+}
+
+.thumbup {
+    font-size: 13px;
+    font-weight: 500;
+    margin-right: 5px
+}
+
+.thumbupo {
+    color: #17a2b8
+}
+
+.iconpadding {
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+.btnpadding {
+  padding-top: 10px;
+}
+
 /*# sourceMappingURL=bootstrap.css.map */

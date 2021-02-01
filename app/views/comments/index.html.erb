@@ -6,15 +6,9 @@
 <% else %>
 <%=render partial: '/partials/article', locals: {article: @article}%>
 <% end %>
-
-     
-    
-
 <%=render partial: '/partials/form', locals: {comment: @comment, article: @article, submit_text: "Submit Comment"}%><br>
-
-
 <%= render partial: '/partials/comments', locals:{article: @article}%>
 
-<%= link_to 'Requirment Satisfaction', new_article_comment_path %>
+                                <%= link_to 'Requirment Satisfaction', new_article_comment_path %>
 
 

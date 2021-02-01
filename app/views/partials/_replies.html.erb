@@ -1,16 +1,16 @@
-Replies:
 
-    <div class="card">
-        <ul>
-            <% comment.replies.each do |reply| %>
-                <li><%= reply.content%></li>
-                        <% if current_user.id == reply.user.id%>
-                <%=link_to "Edit Reply", edit_reply_path(reply)%> <br>
-                <%=link_to "Delete Reply", reply , method: :delete,  data:{Confirm: "Delete?"}%>
+       
+<% comment.replies.each do |reply| %>
+<div class="media-body">
+    <div class="row">
+        <div class="col-12 d-flex">
+            <h5><%=reply.comment.user.username%></h5>
+        </div>
+    </div> 
+    <%= reply.content%> <br>
+    <% if current_user.id == reply.user.id%>
+                <%=link_to "Edit Reply", edit_reply_path(reply),class:"btn btn-ssm btn-outline-secondary"%> 
+                <%=link_to "Delete Reply", reply , method: :delete,  data:{Confirm: "Delete?"},class:"btn btn-ssm btn-outline-secondary"%>
                 <%end%>
             <%end%>
-        </ul>
-    
-    </div>
-
-   
+</div>

@@ -1,16 +1,21 @@
-<h2>Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+
+ <div class="container  ">
+ <div class="card" style="margin-top:130px;margin-right:300px;margin-bottom:0px;margin-left:300px;border:2px double; ">
+
+      <%= form_for(resource, as: resource_name, url: session_path(resource_name),html:{class:"form-signin "}) do |f| %>
+    <h2 class="text-center mt-3">Login</h2>
+
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      <%= f.label :email, class:"sr-only"  %><br />
+      <%= f.email_field :email , autofocus: true, autocomplete: "email",class:"form-control",placeholder: 'Email address' %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+   <div class="field">
+      <%= f.label  :password, class:"sr-only" %><br />
+      <%= f.password_field :password, autocomplete: "current-password", class:"form-control", placeholder:"Password" %>
   </div>
-
+ 
   <% if devise_mapping.rememberable? %>
     <div class="field">
       <%= f.check_box :remember_me %>
@@ -19,8 +24,10 @@
   <% end %>
 
   <div class="actions">
-    <%= f.submit "Log in" %>
+    <%= f.submit "Log in",class:"btn btn-lg  btn-outline-secondary btn-block" %><br>
+<%= render "devise/shared/links" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+</div>
+</div>
