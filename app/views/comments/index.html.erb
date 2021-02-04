@@ -1,13 +1,16 @@
 
 <% if !@bad_sources.include?(@article.source)%>
-<div class="embed-responsive embed-responsive-0by0 container-flex">
-    <iframe class="embed-responsive-item" src="<%=@article.url%>"></iframe>
-</div>
-<% else %>
-<%=render partial: '/partials/article', locals: {article: @article}%>
+    <div class="embed-responsive embed-responsive-0by0 container-flex">
+        <iframe class="embed-responsive-item" src="<%=@article.url%>"></iframe>
+    </div>
+    <% else %>
+        <%=render partial: '/partials/article', locals: {article: @article, descritpion_length: 500,pathing:@article.url}%>
 <% end %>
+
 <%= link_to 'Requirment Satisfaction', new_article_comment_path(@article) %>
+
 <%=render partial: '/partials/form', locals: {comment: @comment, article: @article, submit_text: "Submit Comment"}%><br>
+
 <%= render partial: '/partials/comments', locals:{article: @article}%>
 
 
