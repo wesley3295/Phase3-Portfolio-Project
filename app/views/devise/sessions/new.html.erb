@@ -3,8 +3,10 @@
  <div class="container  ">
  <div class="card" style="margin-top:130px;margin-right:300px;margin-bottom:0px;margin-left:300px;border:2px double; ">
 <%=flash[:error]%>
-
       <%= form_for(resource, as: resource_name, url: session_path(resource_name),html:{class:"form-signin "}) do |f| %>
+<%= content_tag(:div, flash[:alert], :id => "flash_alert") if flash[:alert] %>
+<%=render partial: '/partials/errors', locals:{instance:@user}%>
+ <div class="field<%= ' field_with_errors' if @user.errors[:content].any? %>">
     <h2 class="text-center mt-3">Login</h2>
 
   <div class="field">
