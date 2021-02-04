@@ -5,8 +5,12 @@ class ArticlesController < ApplicationController
     end
 
     def index
+        # byebug
         # Api.load_data
-       if !params[:source].blank?
+    if !params[:query].blank?
+        articles = Article.search_article(params[:query])
+        @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)
+    elsif !params[:source].blank?
         articles = Article.by_source(params[:source])
         @articles = Kaminari.paginate_array(articles).page(params[:page]).per(25)
     else
