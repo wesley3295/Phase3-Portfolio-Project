@@ -1,15 +1,14 @@
 Rails.application.routes.draw do
   
   devise_for :users, :controllers => {sessions: 'sessions', registrations: 'registrations', :omniauth_callbacks => "omniauth_callbacks"}
-  resources :articles
+  resources :users, only: [:show]
   root to: "articles#index"
-  resources :articles, only: [:show] do
-    resources :comments, only: [:show, :index, :new] do
-      resources :replies, only: [:edit]
+  resources :articles, only: [:index,:create] do
+    resources :comments, only: [:index,:edit,:update,:new,:create,:destroy] do
+      resources :replies, only: [:edit,:create,:update,:destroy,:delete]
     end
   end
-  resources :comments
-  resources :replies
   resources :subscriptions
+  match '*path' => 'application#fallback', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
