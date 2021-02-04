@@ -11,10 +11,12 @@ def self.by_source(source)
     where(source: source)
 end 
 
-
 def self.all_sources
     Article.pluck(:source).uniq.sort
 end
 
+def self.search_article(query)
+    where('title LIKE ?', "%#{query}%")
+end
 
 end
