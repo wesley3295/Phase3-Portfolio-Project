@@ -1,0 +1,5 @@
+  <%= form_tag("/articles", method: "get") do %>
+  
+    <%= text_field_tag :query %>
+    <%= submit_tag "search",data: { disable_with: false }%>
+    <% end %>
