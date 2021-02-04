@@ -1,22 +1,34 @@
+
 class SessionsController < Devise::SessionsController
+  before_action :configure_sign_in_params, only: [:create]
+#   def destroy
+#     @user = User.find_by_id(params[:id])
+#     session.destroy
+#     redirect_to articles_path
+# end
 
-    def destroy
-        @user = User.find_by_id(params[:id])
-        session.destroy
-        redirect_to articles_path
-    end
+# def new
+#     @user = User.new 
+# end
+  # GET /resource/sign_in
+  def new
+    super
+  end
 
-    def new
-        @user = User.new 
-    end
+  # POST /resource/sign_in
+  def create
+    super
+  end
 
-    
-    # def create
-    #     @user = User.find_by_username(params[:user][:email])
-    #     if @user && @user.authenticate(params[:user][:password])
-    #         session[:user_id] = @user.id
-    #         redirect_to articles_path
-    #     else
-    #         render :new
-    # end
+  # DELETE /resource/sign_out
+  def destroy
+    super
+  end
+
+  # protected
+
+  # If you have extra params to permit, append them to the sanitizer.
+  def configure_sign_in_params
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
+  end
 end
