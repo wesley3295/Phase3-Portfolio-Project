@@ -4,7 +4,7 @@
 <div class="media-body">
     <div class="row">
         <div class="col-12 d-flex">
-            <h5><%=reply.comment.user.username%></h5>
+            <h5><%=reply.user.username%></h5>
         </div>
     </div> 
     <%= reply.content%> <br>
@@ -12,7 +12,7 @@
 <%=""%>
     <% elsif current_user.id == reply.user.id%>
                 <%=link_to "Edit Reply", edit_article_comment_reply_path(article, comment, reply),class:"btn btn-ssm btn-outline-secondary"%> 
-                <%=link_to "Delete Reply", reply , method: :delete,  data:{Confirm: "Delete?"},class:"btn btn-ssm btn-outline-secondary"%>
+                <%=link_to "Delete Reply",article_comment_reply_path(article, comment, reply) , method: :delete,  data:{Confirm: "Delete?"},class:"btn btn-ssm btn-outline-secondary"%>
                 <%end%>
             <%end%>
 </div>
