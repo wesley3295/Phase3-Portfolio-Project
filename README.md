@@ -24,7 +24,3 @@ Things you may want to cover:
 * ...
 
 
--nav bar
--validations
--nested form
--
