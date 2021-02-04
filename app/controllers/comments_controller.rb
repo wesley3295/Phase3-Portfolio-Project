@@ -1,10 +1,14 @@
 class CommentsController < ApplicationController
     
-        before_action :find_comment, only: [:show, :edit, :update, :destroy]
-        before_action :find_article, only: [:index, :new, :create,:destroy,:update]
-        before_action :article_comments, only: [:index]
+        before_action :find_comment, only: [:edit,:update,:destroy]
+        before_action :find_article, only: [:new,:create,:index,:edit,:update,:destroy]
         before_action :bad_sources, only: [:index,:create]
+        before_action :authenticate_user_of_comment, only: [:edit]
+        before_action :article_exists?, only: [:new,:edit]
+        before_action :comment_exists?, only: [:edit]
+        
         def new
+            
             @comment = Comment.new
         end
     
@@ -16,10 +20,11 @@ class CommentsController < ApplicationController
                 redirect_to new_user_session_path
             elsif
                 @comment.user_id = current_user.id
+                @comment.article_id = @article.id
                     if  @comment.save
                         redirect_to article_comments_path(@article)
                     else
-                        render :index
+                        render '/comments/index'
                     end
             end
         end
@@ -30,40 +35,27 @@ class CommentsController < ApplicationController
                 @comment = Comment.new
                 @reply = Reply.new
             else
-              @comments = Comment.all
+              redirect_to articles_path
             end
-          end
+        end
     
         def edit
-           @article = @comment.article
         end
     
         def update
             if @comment.update(comment_params)
-                redirect_to article_comments_path(article)
+                redirect_to article_comments_path(@article)
             else
                 render :edit          
             end
         end
     
         def destroy
-            # article = @comment.article
             @comment.delete
-            redirect_to article_comments_path(article)
+            redirect_to article_comments_path(@article)
         end
-    
+
         private
-        def bad_sources
-            @bad_sources = ["CNBC","CNN Europe","Engadget","Fansided","Financial Post | Canada Business News","Forbes","Seeking Alpha","Sports Illustrated","Sports | Reddit", "The Verge","Yardbarker.com","business","dailynorthwestern","dennews","deseretnews","euroweeklynews","hitfix","indybay","nationalpost","newswithviews","si","stylecaster","suntimes","thestar","tmz","torontosun","tribune242","vancouversun","wwd"]
-        end
-
-        def find_article
-            @article = Article.find_by(params[:article_id])
-        end
-
-        def article_comments
-            @comments= @article.comments if @article
-        end
 
         def find_comment
             @comment = Comment.find_by_id(params[:id])
@@ -72,6 +64,7 @@ class CommentsController < ApplicationController
         def comment_params
             params.require(:comment).permit(:content, :article_id)
         end
-    
-   
+ 
+        
+       
 end
