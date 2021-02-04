@@ -1,70 +1,31 @@
   
   <div class="container">
   <%=render partial: '/partials/filter', locals: {articles: @articles}%>
-<% if !params[:source].blank? %>
 
+<% if !params[:source].blank? || !params[:query].blank? %>
 <%@articles.each do |article|%>
-    <div class="col-md-10 container">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary">News</strong>
-          <h5 class="mb-0"><%=article.title%></h5>
-          <div class="mb-1 text-muted"><%=article.published_at%></div>
-          <p class="card-text mb-auto"><%=article.description.first(90)%></p>
-          <%=link_to "Continue reading...", article_comments_path(article), class:"stretched-link"%>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="200" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"><%=article.source%></text></svg>
-        </div>
-      </div>
-    </div>
+ <%= render partial: '/partials/article', locals: {article: article, descritpion_length: 90,pathing:article_comments_path(article)}%>
   <% end %>
-
 <% else %>
+
 <div class="jumbotron p-4 p-md-5 text-white rounded bg-dark">
     <div class="col-md-6 px-0">
-    
       <h1 class="display-4 font-italic"><%=@articles.first.title  %></h1>
       <p class="lead my-3"><%=@articles.first.description.first(500)%></p>
       <p class="lead mb-0"><%=link_to "Continue reading...", @articles.first.url, class:"text-white font-weight-bold"%></p>
     </div>
   </div>
   
-  <div class="row mb-2">
-<%@articles[1,12].each do |article|%>
-    <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary"><%=article.source%></strong>
-          <h5 class="mb-0"><%=article.title%></h5>
-          <div class="mb-1 text-muted"><%=article.published_at%></div>
-          <p class="card-text mb-auto"><%=article.description.first(90)%></p>
-          <%=link_to "Continue reading...", article_comments_path(article), class:"stretched-link"%>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="125" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
-        </div>
-      </div>
-    </div>
+<div class="row mb-2">
+  <%@articles[1,12].each do |article|%>
+    <%= render partial: '/partials/index_articles', locals:{article:article}%>
   <% end %>
-<%@articles[13,24].each do |r2_article|%>
-     <div class="col-md-6">
-      <div class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative">
-        <div class="col p-4 d-flex flex-column position-static">
-          <strong class="d-inline-block mb-2 text-primary"><%=r2_article.source%></strong>
-          <h5 class="mb-0"><%=r2_article.title%></h5>
-          <div class="mb-1 text-muted"><%=r2_article.published_at%></div>
-          <p class="mb-auto"><%=r2_article.description.first(90)%></p>
-          <%=link_to "Continue reading...", article_comments_path(r2_article), class:"stretched-link"%>
-        </div>
-        <div class="col-auto d-none d-lg-block">
-          <svg class="bd-placeholder-img" width="125" height="250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"/><text x="50%" y="50%" fill="#eceeef" dy=".3em"></text></svg>
-        </div>
-      </div>
-    </div>
+  <%@articles[13,24].each do |r2_article|%>
+    <%= render partial: '/partials/index_articles', locals:{article:r2_article}%>
   <% end %>
-  </div>
-  <% end %>
+</div>
+
+<% end %>
 <%= paginate @articles,class:"container" %>
     
     </div>
