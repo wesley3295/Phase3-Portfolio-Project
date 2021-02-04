@@ -1,67 +1,59 @@
 class RepliesController < ApplicationController
+    before_action :find_article, only: [:edit,:create,:update,:destroy]
+    before_action :find_comment, only: [:edit,:create,:update,:destroy]
     before_action :find_reply, only: [:destroy,:update,:edit]
+    before_action :authenticate_user_of_comment, only: [:edit]
     before_action :bad_sources, only: [:create]
-
-    # def create
-    #     @reply = Reply.new(reply_params)
-    #     @comment = @reply.comment
-    #     @article = @comment.article
-    #     @reply.user_id = current_user.id
-    #     if @reply.save  
-    #     redirect_to article_comments_path(@article)#route to art/id/com/id
-    #     else
-    #          render '/comments/index'
-    #     end
-    # end
+    before_action :article_exists?, only: [:edit]
+    before_action :comment_exists?, only: [:edit]
 
     def create
         @reply = Reply.new(reply_params)
-        @comment = @reply.comment
-        @article = @comment.article
         if !current_user
             flash[:error2] = "You must be logged in to make a new reply."
             render '/comments/index'
         elsif
-            @reply.user_id = current_user.id
-                if  @reply.save
-                    redirect_to article_comments_path(@article)
-                else
-                    render '/comments/index'
-                end
+            @reply.comment_id = @comment.id
+          @reply.user_id = current_user.id
+            if  @reply.save
+                redirect_to article_comments_path(@article)
+            else
+                render '/comments/index'
+            end
         end
     end
 
     def edit
-        @comment = @reply.comment
+        if !@reply
+            redirect_to article_comments_path(@article)
+        end
     end
 
     def update
-        article = @reply.comment.article
         if @reply.update(reply_params)
-            redirect_to article_comments_path(article)
+            redirect_to article_comments_path(@article)
         else
             render :edit
         end
     end
 
     def destroy
-        article = @reply.comment.article
-        @reply.delete
-        redirect_to article_comments_path(article)
+        @reply.destroy
+        redirect_to article_comments_path(@article)
     end
 
-
     private
-
     def find_reply
         @reply = Reply.find_by_id(params[:id])
     end
 
-    def reply_params
-        params.require(:reply).permit(:content, :comment_id)
+    def find_comment
+        @comment = Comment.find_by_id(params[:comment_id])
     end
 
-    def bad_sources
-        @bad_sources = ["CNBC","CNN Europe","Engadget","Fansided","Financial Post | Canada Business News","Forbes","Seeking Alpha","Sports Illustrated","Sports | Reddit", "The Verge","Yardbarker.com","business","dailynorthwestern","dennews","deseretnews","euroweeklynews","hitfix","indybay","nationalpost","newswithviews","si","stylecaster","suntimes","thestar","tmz","torontosun","tribune242","vancouversun","wwd"]
+    def reply_params
+        params.require(:reply).permit(:content, :comment_id,:user_id)
     end
+
+    
 end
