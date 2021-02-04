@@ -4,13 +4,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: [:facebook]
 
-         validates :email, presence: true
-         validates :password, presence: true
-    
-  has_many :comments
+  validates :email, presence: true
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :username, presence: true
+        
+  has_many :comments, dependent: :delete_all
   has_many :articles, through: :comments
   has_many :replies
   has_many :subscriptions
+
   accepts_nested_attributes_for :subscriptions
  
 
@@ -25,4 +28,3 @@ class User < ApplicationRecord
   end
 
 end
-#User.find_by_email('wspencer3295@yahoo.com').destroy
