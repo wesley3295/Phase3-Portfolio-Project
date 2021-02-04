@@ -1,30 +1,16 @@
 
-<%=form_for reply do |f|%>
- <% if reply.errors.any? %>
-   <div id="error_explanation">
-    <h4>Error:</h4>
-     <ul>
-       <% reply.errors.full_messages.each do |message| %>
-         <li><%= message %></li>
-       <% end %>
-     </ul>
-   </div>
- <% end %>
-
-
- <div class="field<%= ' field_with_errors' if reply.errors[:content].any? %>">
- <%=flash[:error2]%>
-<%=f.hidden_field :comment_id, :value=> comment.id%>
-
-<%=f.text_area :content, placeholder:"Add a reply", class: "form-control addtxt" %>
-<%f.submit %>
-<button class="btn btn-sm btn-outline-secondary" style="padding-top:1px;" >
-<span class="">Reply</span>
-<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16" >
-<path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" ></path>
-</svg>
-
-</button>
-<%end%>
+<%=form_for [article, comment, reply] do |f|%>
+<%=render partial: '/partials/errors', locals:{instance:@reply}%>
+<div class="field<%= ' field_with_errors' if reply.errors[:content].any? %>">
+  
+    <%=f.text_area :content, placeholder:"Add a reply", class: "form-control addtxt" %>
+    <%f.submit %>
+      <button class="btn btn-sm btn-outline-secondary" style="padding-top:1px;" >
+          <span>Reply</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-chat-fill" viewBox="0 0 16 16" >
+            <path d="M8 15c4.418 0 8-3.134 8-7s-3.582-7-8-7-8 3.134-8 7c0 1.76.743 3.37 1.97 4.6-.097 1.016-.417 2.13-.771 2.966-.079.186.074.394.273.362 2.256-.37 3.597-.938 4.18-1.234A9.06 9.06 0 0 0 8 15z" ></path>
+          </svg>
+      </button>
+  <%end%>
 </div>
 
