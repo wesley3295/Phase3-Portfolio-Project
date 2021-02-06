@@ -3,9 +3,8 @@ class CommentsController < ApplicationController
         before_action :find_comment, only: [:edit,:update,:destroy]
         before_action :find_article, only: [:new,:create,:index,:edit,:update,:destroy]
         before_action :bad_sources, only: [:index,:create]
-        before_action :authenticate_user_of_comment, only: [:edit]
         before_action :article_exists?, only: [:new,:edit]
-        before_action :comment_exists?, only: [:edit]
+        before_action :comment_exists?,:authenticate_user_of_comment, only: [:edit]
         
         def new
             
@@ -64,7 +63,4 @@ class CommentsController < ApplicationController
         def comment_params
             params.require(:comment).permit(:content, :article_id)
         end
- 
-        
-       
 end
