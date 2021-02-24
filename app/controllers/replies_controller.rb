@@ -1,11 +1,8 @@
 class RepliesController < ApplicationController
-    before_action :find_article, only: [:edit,:create,:update,:destroy]
-    before_action :find_comment, only: [:edit,:create,:update,:destroy]
+    before_action :find_article,:find_comment, only: [:edit,:create,:update,:destroy]
     before_action :find_reply, only: [:destroy,:update,:edit]
-    before_action :authenticate_user_of_comment, only: [:edit]
+    before_action :article_exists?,:comment_exists?,:authenticate_user_of_comment, only: [:edit]
     before_action :bad_sources, only: [:create]
-    before_action :article_exists?, only: [:edit]
-    before_action :comment_exists?, only: [:edit]
 
     def create
         @reply = Reply.new(reply_params)

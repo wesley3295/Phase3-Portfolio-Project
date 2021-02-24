@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   end
   resources :subscriptions
+  get '/max', to: 'articles#show'
   match '*path' => 'application#fallback', via: :all
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

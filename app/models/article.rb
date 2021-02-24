@@ -15,7 +15,7 @@ def self.all_sources
 end
 
 def self.search_article(query)
-    where('title LIKE ?', "%#{query}%")
+    where('LOWER (title) LIKE ?', "%#{query.downcase }%")
 end
 
 end
