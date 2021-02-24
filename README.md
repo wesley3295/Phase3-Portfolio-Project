@@ -2,8 +2,12 @@
 The Divide is a rails application that has a live API feeding the Articles Table within the Database of the application.
 This API has current articles from all over the world. The Divide gives you the option to join the community and comment
  on articles and reply to comments on the articles. The application has full CRUD functionality!
+
+
+
 --------------------------------------Installation-----------------------------------------------------------
- Upon cloning the application
+ Upon cloning the application and opening is editor
+
  1)'bundle install' in console
 
     2)migrate tables with command 'rails db:migrate' in console
@@ -19,7 +23,11 @@ This API has current articles from all over the world. The Divide gives you the 
                 4)run 'rails s' in console
 
                     5)navigate to 'localhost:3000' and sign up 
-                    
+
                         6)you can now proceed with full CRUD functionality!
+
 ----------------------------------------------------------------------------------------------------------------------------
+
+VIDEO
+https://www.youtube.com/watch?v=go7O0_d46s0
 
